@@ -28,19 +28,15 @@ end
 function ctx:draw()
 
     love.graphics.push()
-            love.graphics.translate(-camera.position.x, -camera.position.y)
+    love.graphics.translate(-camera.position.x, -camera.position.y)
 
-        love.graphics.push()
-        lightWorld:draw(function()
-
-
-            for k,v in core.system.orderedPairs(game.system_categories.draw) do
-                v.draw()
-            end
-        end)
-        love.graphics.pop()
+    lightWorld:draw(function()
+    for k,v in core.system.orderedPairs(game.system_categories.draw) do
+            v.draw()
+        end
+    end)
     love.graphics.pop()
-  for k,v in core.system.orderedPairs(game.system_categories.draw_ui) do
+    for k,v in core.system.orderedPairs(game.system_categories.draw_ui) do
         v.draw_ui()
     end
     local fps = love.timer.getFPS( )

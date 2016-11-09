@@ -1,0 +1,16 @@
+Idle
+-- Does normal behavior
+
+Suspicious
+-- Knows something is up
+-- Doesn't really know where to go, but will look around more
+
+Alerted
+-- Knows something is up
+-- Knows where to go, and will walk there
+-- Tries to alert others
+
+Spotted
+-- Follows person
+-- Tries to alert others
+

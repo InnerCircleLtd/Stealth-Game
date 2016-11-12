@@ -5,6 +5,7 @@ return function(x,y)
  	agent.name       ="agent".. id
 	agent.position   = {x=x, y=y, rotation=rot,speed = 100}
 	agent.bump_shape = {w = 32, h = 32}
-	agent.light_shape = {w=32, h=32}
+	agent.light_shape = {w=32, h=32, worlds={"lightWorld"}}
+	agent.is_wall = {true}
 	return agent
 end

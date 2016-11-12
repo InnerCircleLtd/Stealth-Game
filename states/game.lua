@@ -4,21 +4,22 @@ local LightWorld = require "zz_lib.light_world" --the path to where light_world 
   lightWorld = LightWorld({
     ambient = {30,30,30},         --the general ambient light in the environment
   })
-    
+ lightWorld2 = LightWorld({
+    ambient = {30,30,30},         --the general ambient light in the environment
+  })
+
 function ctx:enter(dt)
     GS.push(core.states.loading)
     love.mouse.setGrabbed(true)
 end
 
 
-function get_nil()
-    return "nil" 
-end
-
-
 function ctx:update(dt)
-      lightWorld:update(dt)
     lightWorld:setTranslation(-camera.position.x, -camera.position.y, 1)
+    lightWorld2:setTranslation(-camera.position.x, -camera.position.y, 1)
+      lightWorld2:update(dt)
+
+      lightWorld:update(dt)
     for k,v in core.system.orderedPairs(game.system_categories.update) do
         v.update(dt)
     end
@@ -27,15 +28,67 @@ end
 
 function ctx:draw()
 
+    for k,v in pairs(game.canvases) do
+        love.graphics.setCanvas(v)
+        love.graphics.clear()
+    end
+        love.graphics.setCanvas(game.canvases.light_tmp)
+    love.graphics.setColor(128,128,128)
+    love.graphics.rectangle("fill",0,0,2000,1000)
+    love.graphics.setColor(255,255,255)
+    love.graphics.setCanvas()
     love.graphics.push()
     love.graphics.translate(-camera.position.x, -camera.position.y)
 
-    lightWorld:draw(function()
+
     for k,v in core.system.orderedPairs(game.system_categories.draw) do
-            v.draw()
-        end
-    end)
+        love.graphics.setCanvas(game.canvases.objs)
+        v.draw()
+    end
+     for k,v in core.system.orderedPairs(game.system_categories.draw_canvas) do
+        v.draw_canvas()
+    end
+    for k,v in core.system.orderedPairs(game.system_categories.draw_map) do
+        v.draw_map()
+    end
+    for k,v in core.system.orderedPairs(game.system_categories.draw_map) do
+        v.draw_ground()
+    end
+
     love.graphics.pop()
+    love.graphics.setCanvas()
+    love.graphics.draw(game.canvases.light_tmp,0,0)
+    love.graphics.draw(game.canvases.light_pl,0,0)
+    love.graphics.setBlendMode("multiply")
+    love.graphics.draw(game.canvases.ground,0,0)
+
+
+    love.graphics.setBlendMode("alpha")
+    love.graphics.setCanvas(game.canvases.light_tmp)
+    love.graphics.clear()
+    love.graphics.draw(game.canvases.light_pl,0,0)
+    love.graphics.setBlendMode("multiply")
+    love.graphics.draw(game.canvases.objs,0,0)
+    love.graphics.setBlendMode("alpha")
+    love.graphics.setCanvas()
+    love.graphics.draw(game.canvases.light_tmp,0,0)
+    
+    love.graphics.setBlendMode("alpha")
+    love.graphics.setCanvas(game.canvases.light_tmp)
+    love.graphics.clear()
+
+    love.graphics.draw(game.canvases.light_pl,0,0)
+    love.graphics.setBlendMode("multiply")
+    love.graphics.draw(game.canvases.light_objs,0,0)
+    love.graphics.setBlendMode("alpha")
+    love.graphics.setCanvas()
+    love.graphics.draw(game.canvases.light_tmp,0,0)
+    
+    love.graphics.draw(game.canvases.walls,0,0)
+
+
+    --love.graphics.draw(game.canvases.walls,0,0)
+
     for k,v in core.system.orderedPairs(game.system_categories.draw_ui) do
         v.draw_ui()
     end

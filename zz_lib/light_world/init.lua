@@ -109,7 +109,7 @@ end
 function light_world:drawShadows(l,t,w,h,s)
   love.graphics.setCanvas( self.normalMap )
   love.graphics.clear()
-  love.graphics.setCanvas()
+  love.graphics.setCanvas(canvas)
   util.drawto(self.normalMap, l, t, s, function()
     for i = 1, #self.bodies do
       if self.bodies[i]:isVisible() then
@@ -123,14 +123,14 @@ function light_world:drawShadows(l,t,w,h,s)
 
   love.graphics.setCanvas( self.shadow_buffer )
   love.graphics.clear()
-  love.graphics.setCanvas()
+  love.graphics.setCanvas(canvas)
   for i = 1, #self.lights do
     local light = self.lights[i]
     if light:isVisible() then
       -- create shadow map for this light
       love.graphics.setCanvas( self.shadowMap )
       love.graphics.clear()
-      love.graphics.setCanvas()
+      love.graphics.setCanvas(canvas)
       util.drawto(self.shadowMap, l, t, s, function()
         --I dont know if it uses both or just calls both
         love.graphics.stencil(function()
@@ -208,7 +208,7 @@ function light_world:drawGlow(l,t,w,h,s)
   -- create glow map
   love.graphics.setCanvas( self.glowMap )
   love.graphics.clear()
-  love.graphics.setCanvas()
+  love.graphics.setCanvas(canvas)
   util.drawto(self.glowMap, l, t, s, function()
     for i = 1, #self.bodies do
       if self.bodies[i]:isVisible() and self.bodies[i].glowStrength > 0.0 then
@@ -228,7 +228,7 @@ function light_world:drawRefraction(l,t,w,h,s)
   -- create refraction map
   love.graphics.setCanvas( self.refractionMap )
   love.graphics.clear()
-  love.graphics.setCanvas()
+  love.graphics.setCanvas(canvas)
   util.drawto(self.refractionMap, l, t, s, function()
     for i = 1, #self.bodies do
       if self.bodies[i]:isVisible() then
@@ -247,7 +247,7 @@ function light_world:drawReflection(l,t,w,h,s)
   -- create reflection map
   love.graphics.setCanvas( self.reflectionMap )
   love.graphics.clear()
-  love.graphics.setCanvas()
+  love.graphics.setCanvas(canvas)
   util.drawto(self.reflectionMap, l, t, s, function()
     for i = 1, #self.bodies do
       if self.bodies[i]:isVisible() then

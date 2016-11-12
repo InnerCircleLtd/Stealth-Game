@@ -23,6 +23,16 @@ loading.phases = {
         
         next_id = next_id_func()
         game.resources = {}
+        game.canvases = {}
+        game.canvases.ground = love.graphics.newCanvas(love.graphics.getWidth( ), love.graphics.getHeight( ))
+        game.canvases.objs = love.graphics.newCanvas(love.graphics.getWidth( ), love.graphics.getHeight( ))
+        game.canvases.walls = love.graphics.newCanvas(love.graphics.getWidth( ), love.graphics.getHeight( ))
+        game.canvases.light_tmp = love.graphics.newCanvas(love.graphics.getWidth( ), love.graphics.getHeight( ))
+        game.canvases.ghost = love.graphics.newCanvas(1,1)
+
+        game.canvases.light_pl = love.graphics.newCanvas(love.graphics.getWidth( ), love.graphics.getHeight( ))
+        game.canvases.light_objs = love.graphics.newCanvas(love.graphics.getWidth( ), love.graphics.getHeight( ))
+
         -- require component types
     end,
     require 'states.loading_functions.load_systems', 
@@ -53,8 +63,10 @@ loading.phases = {
                 i = i + 1
             end
         end
-    end
+    end 
+    
 }
+
 
 
 function loading:enter(from)
@@ -65,6 +77,7 @@ end
 
 -- Leave loading screen
 function loading:leave(from)
+    
 
     for k,v in pairs(game.systems) do
         print("Running system "..v.name)

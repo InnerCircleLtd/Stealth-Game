@@ -783,22 +783,25 @@ end
 
 --- Draw every Layer
 -- @return nil
-function Map:draw()
+function Map:draw(xx)
 	local current_canvas = love.graphics.getCanvas()
 	love.graphics.setCanvas(self.canvas)
 	if self.canvas.clear then
 		self.canvas:clear()
 	else
-		local r,g,b,a = love.graphics.getBackgroundColor()
-		love.graphics.clear(r,g,b,a,self.canvas)
+			local r,g,b,a = love.graphics.getBackgroundColor()
+
+			love.graphics.clear(r,g,b,a,self.canvas)
+
 	end
+		if not xx then
 
 	for _, layer in ipairs(self.layers) do
 		if layer.visible and layer.opacity > 0 then
 			self:drawLayer(layer)
 		end
 	end
-
+		end
 	love.graphics.setCanvas(current_canvas)
 	love.graphics.push()
 	love.graphics.origin()

@@ -1,7 +1,7 @@
 sti = require 'zz_lib.sti'
 
 return function()
-    core.system.add( my_require 'systems.render.tile_map',  {"draw"})
+    core.system.add( my_require 'systems.render.tile_map',  {"draw","draw_map","draw_ground"})
 
     core.system.add( my_require 'systems.anger_management.debug_draw_circles',  {"draw"})
     core.system.add( my_require 'systems.anger_management.debug_draw_systems.draw_idle',  {"draw"})
@@ -10,9 +10,10 @@ return function()
     core.system.add( my_require 'systems.anger_management.debug_draw_systems.draw_alerted',  {"draw"})
     core.system.add( my_require 'systems.pathfinding.trivial_path',  {"update"})
     core.system.add( my_require 'systems.debug.draw_route',  {"draw"})
-    core.system.add( my_require 'systems.debug.draw_los',  {"draw"})
+    core.system.add( my_require 'systems.debug.draw_los',  {"draw_canvas"})
     core.system.add( my_require 'systems.collision.light_loaders',  {"update"})
     core.system.add( my_require 'systems.collision.light_source_loader',  {"update"})
+    core.system.add( my_require 'systems.collision.light_source_directional',  {"update"})
 
     --core.system.add( my_require 'systems.debug.draw_bump',  {"draw"}
     

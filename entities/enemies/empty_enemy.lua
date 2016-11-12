@@ -10,6 +10,8 @@ return function(x,y, rot, route)
 		agent.bump_shape = {w = 28, h = 28}
 
 	agent.routes = {idle=route}
-	agent.view_cone = {fov=100, distance = 600}
+	agent.view_cone = {fov=50, distance = 600}
+	
+
 	return agent
 end

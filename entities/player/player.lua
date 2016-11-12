@@ -10,6 +10,6 @@ return function(x,y, rot)
 	agent.speed   = {speed = 100}
 	agent.bump_shape = {w = 28, h = 28}
 	agent.angry_value = {anger = 1000}
-	agent.view_cone = {fov=361, is_pl=true, distance = 600}
+	agent.view_cone = {fov=362, is_pl=true, distance = 1500}
 	return agent
 end

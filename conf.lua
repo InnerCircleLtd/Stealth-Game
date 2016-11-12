@@ -1,8 +1,9 @@
 love.conf = function(t)
   t.title = "Stealth Game Prototype"
   t.version = "0.10.1"
-  t.window.width = 1366
-  t.window.height = 768
+  t.window.width = 1920
+  t.window.height = 1080
+  t.window.fullscreen = true
   t.window.resizable = false
   t.console = false
   t.window.vsync = false

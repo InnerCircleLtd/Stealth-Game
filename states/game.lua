@@ -1,12 +1,6 @@
 local minfps = 1000
 local ctx = GS.new()
-local LightWorld = require "zz_lib.light_world" --the path to where light_world is (in this repo "lib")
-  lightWorld = LightWorld({
-    ambient = {30,30,30},         --the general ambient light in the environment
-  })
- lightWorld2 = LightWorld({
-    ambient = {30,30,30},         --the general ambient light in the environment
-  })
+
 
 function ctx:enter(dt)
     GS.push(core.states.loading)
@@ -15,11 +9,7 @@ end
 
 
 function ctx:update(dt)
-    lightWorld:setTranslation(-camera.position.x, -camera.position.y, 1)
-    lightWorld2:setTranslation(-camera.position.x, -camera.position.y, 1)
-      lightWorld2:update(dt)
 
-      lightWorld:update(dt)
     for k,v in core.system.orderedPairs(game.system_categories.update) do
         v.update(dt)
     end
@@ -32,7 +22,7 @@ function ctx:draw()
         love.graphics.setCanvas(v)
         love.graphics.clear()
     end
-        love.graphics.setCanvas(game.canvases.light_tmp)
+    love.graphics.setCanvas(game.canvases.light_tmp)
     love.graphics.setColor(128,128,128)
     love.graphics.rectangle("fill",0,0,2000,1000)
     love.graphics.setColor(255,255,255)
@@ -62,6 +52,17 @@ function ctx:draw()
     love.graphics.setBlendMode("multiply")
     love.graphics.draw(game.canvases.ground,0,0)
 
+    love.graphics.setBlendMode("alpha")
+    love.graphics.setCanvas(game.canvases.light_tmp)
+    love.graphics.clear()
+
+    love.graphics.draw(game.canvases.light_pl,0,0)
+    love.graphics.setBlendMode("multiply")
+    love.graphics.draw(game.canvases.light_objs,0,0)
+    love.graphics.setBlendMode("alpha")
+    love.graphics.setCanvas()
+    love.graphics.draw(game.canvases.light_tmp,0,0)
+
 
     love.graphics.setBlendMode("alpha")
     love.graphics.setCanvas(game.canvases.light_tmp)
@@ -73,16 +74,7 @@ function ctx:draw()
     love.graphics.setCanvas()
     love.graphics.draw(game.canvases.light_tmp,0,0)
     
-    love.graphics.setBlendMode("alpha")
-    love.graphics.setCanvas(game.canvases.light_tmp)
-    love.graphics.clear()
-
-    love.graphics.draw(game.canvases.light_pl,0,0)
-    love.graphics.setBlendMode("multiply")
-    love.graphics.draw(game.canvases.light_objs,0,0)
-    love.graphics.setBlendMode("alpha")
-    love.graphics.setCanvas()
-    love.graphics.draw(game.canvases.light_tmp,0,0)
+ 
     
     love.graphics.draw(game.canvases.walls,0,0)
 

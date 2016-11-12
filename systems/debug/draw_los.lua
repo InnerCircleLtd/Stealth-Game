@@ -5,7 +5,7 @@ local function filter_not(a)
 			if a.name ~= "player"then
 				return a ~= obj
 			else
-				return a ~= obj and obj.is_wall
+				return a ~= obj and obj.is_obstructing
 			end
 		end
 	end
@@ -50,6 +50,7 @@ system.draw_canvas = function()
 
 			x4 = core.rotate_point(-math.pi/180, x4)
 			local r,s = x4.x+v.position.x,x4.y+v.position.y
+
 			local itemInfo, len = game.systems.bump.bump_world:querySegmentWithCoords(x4.x+v.position.x,x4.y+v.position.y,v.position.x,v.position.y, filter_not(v))
 			local item = nil
 			for _, new in pairs(itemInfo) do
@@ -73,11 +74,29 @@ system.draw_canvas = function()
 				end
 
 			end
-			if prev then
-				love.graphics.polygon("fill",r, s, v.position.x,v.position.y, prev.x, prev.y)
+			if v.name ~= "player" then
+			love.graphics.setColor(255,0,0,60)
 			end
+			if prev then
+
+				love.graphics.polygon("fill",r, s, v.position.x,v.position.y, prev.x, prev.y)
+			else
+				if v.name ~= "player" then
+
+			love.graphics.setColor(255,0,0,128)
+				love.graphics.line(r,s,v.position.x,v.position.y)
+				end
+			end
+			love.graphics.setColor(255,255,255,255)
 			prev = {x=r, y=s}
 		end
+			if v.name ~= "player" then
+			love.graphics.setColor(255,60,60,80)
+
+			love.graphics.line(prev.x,prev.y,v.position.x,v.position.y)
+			love.graphics.setColor(255,255,255,255)
+		end
+
 	end
 	love.graphics.setCanvas(canvas)
 end

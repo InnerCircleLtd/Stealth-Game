@@ -56,7 +56,7 @@ loading.phases = {
                 for y = 1, v.m.height do
                      for x = 1, v.m.width do
                         if layer.data[y][x] then
-                            core.entity.add(game.entity_definitions.wall.base_wall((x-0.5)*tile_width,(y-0.5)*tile_height))
+                            core.entity.add(game.entity_definitions.wall.base_wall((x-0.5)*tile_width,(y-0.5)*tile_height), x, y)
                         end
                     end
                 end

@@ -39,53 +39,41 @@ local function get_neighbours(xx)
 	return neighbours
 end
 while true do
-	while true do
-		local map = from:demand()
-		q = {}
-		r = 1
-		visited = {}
+	local map = from:demand()
+	if map == "END" then
+		to:supply("ENDED")
+	end
+	local coords = from:demand()
+	local fp = to_tile(coords[1])
+	visited = {}
+	local tp = to_tile(coords[2])
+	if fp and tp then
+	q[#q+1] = fp
+	fp.route = {}
+	visited[fp.x..":"..fp.y] = "FIRST"
+	while #q >= r and r < 5000 do
 
-		if map == "END" then
-			to:push("ENDED")
-			break
-		end
-			
-		local coords = from:demand()
-		if coords == "END" then
-			to:push("ENDED")
-			break
-		end
-
-		local fp = to_tile(coords[1])
-		visited = {}
-		local tp = to_tile(coords[2])
-
-		if fp and tp then
-			q[#q+1] = fp
-			fp.route = {}
-			visited[fp.x..":"..fp.y] = "FIRST"
-			while #q >= r and r < 5000 do
-				for k,v in pairs(get_neighbours(q[r])) do
-					if not map[v.x..":"..v.y] and not visited[v.x..":"..v.y] then
-						q[#q+1] = v
-						if v == tp then
-							r = #q+10
-						end
-						visited[v.x..":"..v.y] = q[r]
-					end
+		for k,v in pairs(get_neighbours(q[r])) do
+			if not map[v.x..":"..v.y] and not visited[v.x..":"..v.y] then
+				q[#q+1] = v
+				if v == tp then
+					r = #q+10
 				end
-				r = r + 1
+				visited[v.x..":"..v.y] = q[r]
 			end
-			if visited[tp.x..":"..tp.y] then
-				for k,v in pairs(recursive_path(tp)) do
-					print(k,v)
-				end
-				to:supply(recursive_path(tp))
-			else
-				to:supply("FAIL")
-			end
-
 		end
-		
+		r = r + 1
+	end
+	
+	
+	if visited[tp.x..":"..tp.y] then
+		for k,v in pairs(recursive_path(tp)) do
+			print(k,v)
+		end
+		to:supply(recursive_path(tp))
+	else
+		to:supply("FAIL")
+	end
+
 	end
 end

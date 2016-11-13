@@ -20,10 +20,7 @@ system.update = function(dt)
 			dx = 1
 		end
 
-		if love.keyboard.isDown("r") then
-	        GS.push(core.states.unloading)
 
-		end
 		hyp = math.sqrt(dx*dx+dy*dy)
 
 		if hyp > 0 then

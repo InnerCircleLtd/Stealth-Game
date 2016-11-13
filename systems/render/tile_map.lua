@@ -2,13 +2,13 @@ local system = {}
 system.name = "draw_tilemap"
 system.importance = 2
 system.draw = function()
-    love.graphics.setCanvas(game.canvases.ghost)
+    
 
 	for k,v in pairs(system.targets) do
-
+		game.data.tile_maps[v.tile_map.map].m:setDrawRange(camera.position.x, camera.position.y,1000,1000)
 		game.data.tile_maps[v.tile_map.map].m:draw()
 	end
-    love.graphics.setCanvas()
+    
 
 
 

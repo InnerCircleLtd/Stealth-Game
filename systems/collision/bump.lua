@@ -4,6 +4,7 @@ local system = {}
 system.name = "bump"
 system.bump_world = bump.newWorld(64)
 system.update = function(dt)
+	
 	for k,v in pairs(system.targets) do
 		if v.position.updated then
 			v.position.x = v.position.x - v.bump_shape.w/2

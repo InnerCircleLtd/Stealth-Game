@@ -28,9 +28,7 @@ function love.keypressed(key)
         	GS.pop()
         end
     end
-    if key == CONTROLS.FOUR  then
-        GS.push(core.states.unloading)
-    end
+
 end
 
 function love.threaderror(t, e)

@@ -46,9 +46,9 @@ system.draw_canvas = function()
 		x3.y = x3.y + v.position.y
 		x4.x = x4.x * 0.7
 		x4.y = x4.y * 0.7
-		for i=1,v.view_cone.fov do
+		for i=1,v.view_cone.fov/2 do
 
-			x4 = core.rotate_point(-math.pi/180, x4)
+			x4 = core.rotate_point(-math.pi/180*2, x4)
 			local r,s = x4.x+v.position.x,x4.y+v.position.y
 
 			local itemInfo, len = game.systems.bump.bump_world:querySegmentWithCoords(x4.x+v.position.x,x4.y+v.position.y,v.position.x,v.position.y, filter_not(v))

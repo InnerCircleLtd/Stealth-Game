@@ -23,21 +23,32 @@ system.update = function(dt)
 end
 
 system.register = function(v)
-	local a = 0
-	for k,v in pairs(system.targets) do
-		a = a +1
-	end
-	if a == 1 then 
 	
-	system.to:clear()
-	
-	end
 
 end
+
+
 system.unregister = function(v)
 
 end
 
+
+system.unload_enter = function()
+		system.to:push("END")
+end
+
+
+system.unload_update = function()
+
+
+	while system.from:peek() do
+	 	local a = system.from:pop()
+	 	if a == "ENDED" then
+	 		return true
+	 	end
+	end
+	return false
+end
 system.requirements = {position=true, pathfinding=true, destination = true}
 
 return system

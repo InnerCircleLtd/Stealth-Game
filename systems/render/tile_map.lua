@@ -5,7 +5,7 @@ system.draw = function()
     love.graphics.setCanvas(game.canvases.ghost)
 
 	for k,v in pairs(system.targets) do
-
+		game.data.tile_maps[v.tile_map.map].m:setDrawRange(camera.position.x,camera.position.y,love.graphics.getWidth(),love.graphics.getHeight())
 		game.data.tile_maps[v.tile_map.map].m:draw()
 	end
     love.graphics.setCanvas()

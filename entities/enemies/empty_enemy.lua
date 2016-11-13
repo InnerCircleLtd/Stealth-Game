@@ -11,7 +11,7 @@ return function(x,y, rot, route)
 
 	agent.routes = {idle=route}
 	agent.view_cone = {fov=100, distance = 400}
-	agent.pathfinding = {to = {x=2,y=3}}
+	agent.pathfinding = {to = {x=100,y=100}}
 	agent.destination = {}
 
 	return agent

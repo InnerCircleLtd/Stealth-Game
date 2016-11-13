@@ -29,7 +29,7 @@ function love.keypressed(key)
         end
     end
     if key == CONTROLS.FOUR  then
-        GS.push(core.states.loading)
+        GS.push(core.states.unloading)
     end
 end
 

@@ -67,11 +67,8 @@ system.draw_canvas = function()
 
 			
 			if item and item.item.angry_value then
-				core.component.add(v, "angry", {true})
+				add_trigger(v,{name="spotted", threat = 1, importance = 4})
 
-				if v.idle then 
-					core.component.remove(v, "idle")
-				end
 
 			end
 			if v.name ~= "player" then

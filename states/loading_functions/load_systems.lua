@@ -2,6 +2,10 @@ sti = require 'zz_lib.sti'
 
 return function()
     core.system.add( my_require 'systems.render.tile_map',  {"draw","draw_map","draw_ground"})
+    core.system.add( my_require 'systems.anger_management.triggers',  {"update"})
+    core.system.add( my_require 'systems.anger_management.react',  {"update"})
+
+    core.system.add( my_require 'systems.anger_management.draw_triggers',  {"draw"})
 
     core.system.add( my_require 'systems.anger_management.debug_draw_circles',  {"draw"})
     core.system.add( my_require 'systems.anger_management.debug_draw_systems.draw_idle',  {"draw"})
@@ -11,6 +15,7 @@ return function()
     core.system.add( my_require 'systems.pathfinding.trivial_path',  {"update"})
     core.system.add( my_require 'systems.pathfinding.get_possible_tiles',  {"update"})
     core.system.add( my_require 'systems.pathfinding.get_bfs_from_map',  {"update"})
+    core.system.add( my_require 'systems.requirement_dummy',  {"update"})
 
     --core.system.add( my_require 'systems.debug.draw_route',  {"draw"})
     core.system.add( my_require 'systems.debug.draw_los',  {"draw_canvas"})

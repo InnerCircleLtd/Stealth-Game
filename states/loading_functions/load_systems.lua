@@ -4,6 +4,7 @@ return function()
     core.system.add( my_require 'systems.render.tile_map',  {"draw","draw_map","draw_ground"})
 
     core.system.add( my_require 'systems.anger_management.debug_draw_circles',  {"draw"})
+    core.system.add( my_require 'systems.anger_management.debug_draw_systems.draw_player',  {"draw_map"})
     core.system.add( my_require 'systems.anger_management.debug_draw_systems.draw_idle',  {"draw"})
     core.system.add( my_require 'systems.anger_management.debug_draw_systems.draw_angry',  {"draw"})
     core.system.add( my_require 'systems.anger_management.debug_draw_systems.draw_suspicious',  {"draw"})
@@ -18,8 +19,8 @@ return function()
     --core.system.add( my_require 'systems.collision.light_source_loader',  {"update"})
     --core.system.add( my_require 'systems.collision.light_source_directional',  {"update"})
 
+    core.system.add( my_require 'systems.player_control.mouse_debug',  {"update"})
 
-    
     core.system.add( my_require 'systems.player_control.basic_movement',  {"update"})
     core.system.add( my_require 'systems.render.camera',  {"update"})
     --core.system.add( my_require 'systems.debug.draw_bump',  {"draw"})

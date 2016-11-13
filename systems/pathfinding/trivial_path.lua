@@ -14,24 +14,25 @@ system.update = function(dt)
 			end
 			if math.abs(a_rot) < 0.05 then
 				-- move towards target
-				local xx = v.routes[v.current_route[1]][v.current_route[2]].x - v.position.x 
+				local xx = v.routes[v.current_route[1]][v.current_route[2]].x - v.position.x
 				local yy = v.routes[v.current_route[1]][v.current_route[2]].y - v.position.y
 
-				hyp = math.sqrt(xx*xx+yy*yy)
+				local hyp = math.sqrt(xx*xx+yy*yy)
 
 				if hyp > 0 then
 					xx = xx / hyp
 					yy = yy / hyp
 				end
+
 				xx = xx * v.position.speed * dt
 				yy = yy * v.position.speed * dt
 				v.position.x = v.position.x + xx
 				v.position.y = v.position.y + yy
 				v.position.updated = true
-				-- Check if close enough
+				-- check if close enough
 				if hyp < 5 then
 					v.current_route[2] = v.current_route[2] + 1
-					if not v.routes[v.current_route[1]][v.current_route[2]] then 
+					if not v.routes[v.current_route[1]][v.current_route[2]] then
 						v.current_route[2] = 1
 					end
 				end

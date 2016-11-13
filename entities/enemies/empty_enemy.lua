@@ -19,6 +19,5 @@ return function(x,y, rot, route)
 
 	agent.triggers  = {}
 	
-
-	return agent
+  return agent
 end
